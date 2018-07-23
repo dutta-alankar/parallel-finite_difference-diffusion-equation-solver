@@ -138,19 +138,19 @@ int main (int argc, char *argv[])
 	double uxx, uyy, a = 1.0;
 	int n; double t;
 	char pcnt = '%';
-	double disp;
+	//double disp;
 	for (n=1, t=0.0; n<=nt; n++, t=t+dt)
 	{
 		for (int i=startrow; i<stoprow; i++)
 		{
 			for (int j=1; j<c-1; j++)
 			{
-				disp = u_old[i][j];
+				//disp = u_old[i][j];
 				uxx = (u_old[i+1][j] - 2*u_old[i][j] + u_old[i-1][j])/pow((x[1]-x[0]),2);
 				uyy = (u_old[i][j+1] - 2*u_old[i][j] + u_old[i][j-1])/pow((y[1]-y[0]),2);
-				disp = u_old[i][j+1];
+				//disp = u_old[i][j+1];
 				u_new[i][j] = dt*a*(uxx + uyy) + u_old[i][j];
-				disp = u_old[i+1][j];
+				//disp = u_old[i+1][j];
 				//printf("%.2f\n",u_new[i][j]);
 			}
 		}
