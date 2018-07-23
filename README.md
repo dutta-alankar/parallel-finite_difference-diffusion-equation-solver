@@ -3,4 +3,4 @@ Parallel (MPI) Row decomposed Diffusion Equation solver by explicit Finite Diffe
 
 To compile: mpicc diff_expl_fd.c -o diffusion -lm -O3
 
-To run: mpiexec -n <processors to deploy> ./diffusion <grid points along rows> <grid points along columns>
+To run: mpiexec -n [processors to deploy] ./diffusion [grid points along rows] [grid points along columns]
