@@ -8,7 +8,7 @@
 double** array2D (int r, int c)
 {
 	/*Creates a 2D array*/
-	double* B = (double *)malloc(r*c* sizeof(double));
+	double* B = (double *)malloc(r*c*sizeof(double));
 	assert(NULL != B);
 	double** A = (double **)malloc(sizeof(double *)*r);
 	assert(A);
@@ -43,7 +43,7 @@ void save_array(double** a, int r, int c, int n)
 	FILE *file;
 	char str[10];
 	char loc[50] = "diff_out/data.";
-	sprintf(str, "%04d", n);
+	sprintf(str, "%06d", n);
 	strcat(loc,str);
 	file=fopen(loc,"w");     
 
