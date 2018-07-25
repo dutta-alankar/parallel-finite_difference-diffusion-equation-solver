@@ -128,14 +128,16 @@ int main (int argc, char *argv[])
 	MPI_Barrier(MPI_COMM_WORLD);
 	/*Computation starts from here*/
 	printf("Proc %d: Computation starts...\n",taskid);
+	double uxx, uyy, a = 1.0;
 	double tstop = 1.0;
-	int nt = 300000; double dt = tstop/(nt-1); int stoprow, startrow;
-	int collectfreq = 10000;
+	double delx = x[1]-x[0], dely = y[1]-y[0]; 
+	double dt = 0.5 *(1/(2*a))*(pow(delx,2)*pow(dely,2))/(pow(delx,2)+pow(dely,2));
+	int nt = (int)(1/dt), stoprow, startrow;
+	int collectfreq = (int) (nt/10);
 	stoprow = rend+1;
 	startrow = 1;
 	if (taskid == MASTER || taskid == numtasks-1) stoprow=rend;
 	//if (taskid == numtasks-1) stoprow = rend*numtasks -1;
-	double uxx, uyy, a = 1.0;
 	int n; double t;
 	char pcnt = '%';
 	double disp;
@@ -164,7 +166,7 @@ int main (int argc, char *argv[])
 				u_new[i][j] = u_old[i][j]-u_new[i][j];
 				u_old[i][j] = u_old[i][j]-u_new[i][j];
 				disp = u_old[i][j];
-				if (disp>1) printf("n=%d,   %f\n",n,disp);
+				if (disp>1) printf("Error! Check Convergence!");
 			}
 		}
 		
