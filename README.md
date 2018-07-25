@@ -7,4 +7,4 @@ To run: mpiexec -n [processors to deploy] ./diffusion [grid points along rows] [
 
 
 Criteria for stability and convergence of Explicit method
-<img src="https://latex.codecogs.com/gif.latex? \delta t=\frac{1}{2a}\frac{\delta x^2 \delta y^2}{\delta x^2 + \delta y^2}" />
+![equation](http://www.codecogs.com/eqnedit.php?latex=\inline&space;\delta&space;t=\frac{1}{2a}\frac{\delta&space;x^2&space;\delta&space;y^2}{\delta&space;x^2&space;&plus;&space;\delta&space;y^2})
