@@ -20,9 +20,7 @@ double** Initialize(int r, int c, double* x, double* y)
 		}
 	}
 	make_dir();
-	//FILE *f = fopen("diff_data/0.data", "wb");
-	//fwrite(u, sizeof(double**), sizeof(u), f);
-	//fclose(f);
+
 	return u;
 }
 
@@ -110,12 +108,7 @@ int main (int argc, char *argv[])
 		MPI_Recv(&u_old[0][0], (rend+1)*c, MPI_DOUBLE, MASTER, 75+taskid, MPI_COMM_WORLD, &status);
 		for (int i=0; i<(rend+1); i++) for (int j=0; j<c; j++){	     u_new[i][j]=u_old[i][j]; resd[i][j] =0.;}
 		printf("Proc %d: Receiving Domain Decomposition....\n",taskid);
-	/*
-		printf("Proc %d:",taskid);
-		for (int m=0; m<=rend+1; m++){
-			for(int n=0; n<c; n++) printf("%.1f   ",u_old[m][n]);
-			printf("\n");}
-	*/
+
 	}	
 	else if(taskid!=MASTER && taskid!=numtasks-1)
 	{
@@ -156,51 +149,8 @@ int main (int argc, char *argv[])
 */
 	
 	for(double t=dt; t<=tstop; t=t+dt, count++)
-	{ 
-		if (taskid == MASTER && t!=dt)
-		{	
-			
-			/*Vertical (row) domain decomposition scheme (send to worker)*/
-			int seek = 0;
-			//if (numtasks!=1) printf("Proc %d: Sending Domain Decomposition....\n",taskid);
-			for (int splitter=0; splitter<numtasks; splitter++)
-			{	
-				seek = rend*splitter-1;
-				if(splitter==0) 
-				{
-					for (int i=0; i<(rend+1); i++)
-					{ 
-						for (int j=0; j<c; j++)
-						{
-						     u_old[i][j]=u[i][j];
-						     u_new[i][j]=u[i][j];
-						     resd[i][j] = 0.;
-						}
-					}
-				}
-				else if(splitter==numtasks-1) MPI_Send(&u[seek][0], (rend+1)*c, MPI_DOUBLE, splitter, 75+splitter, MPI_COMM_WORLD);
-				else if(splitter!=MASTER && splitter!=numtasks-1 ) MPI_Send(&u[seek][0], (rend+2)*c, MPI_DOUBLE, splitter, splitter+75, MPI_COMM_WORLD); 
-					
-			}
-			// tags used till now: 0 to numtasks-1
-		}
-		//MPI_Barrier(MPI_COMM_WORLD);
-		/*Initialize u for each process and Vertical (row) domain decomposition scheme (received from master)*/
-		else if (taskid==numtasks-1 && t!=dt)
-		{
-			MPI_Recv(&u_old[0][0], (rend+1)*c, MPI_DOUBLE, MASTER, 75+taskid, MPI_COMM_WORLD, &status);
-			for (int i=0; i<(rend+1); i++) for (int j=0; j<c; j++){	     u_new[i][j]=u_old[i][j]; resd[i][j] =0.; }
-			//printf("Proc %d: Receiving Domain Decomposition....\n",taskid);
-		}	
-		else if(taskid!=MASTER && taskid!=numtasks-1 && t!=dt)
-		{
-			MPI_Recv(&u_old[0][0], (rend+2)*c, MPI_DOUBLE, MASTER, 75+taskid, MPI_COMM_WORLD, &status);
-			for (int i=0; i<(rend+2); i++) for (int j=0; j<c; j++){	     u_new[i][j]=u_old[i][j]; resd[i][j] =0.; }
-			//printf("Proc %d: Receiving Domain Decomposition....\n",taskid);
-		}
-	
-		
-		MPI_Barrier(MPI_COMM_WORLD);
+	{
+
 		for (n=1; n<=nt; n++)
 		{
 			for (int i=startrow; i<stoprow; i++)
