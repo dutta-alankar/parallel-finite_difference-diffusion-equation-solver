@@ -56,3 +56,20 @@ void save_array(double** a, int r, int c, int n)
 	//if (n==0)	for(int m=0; m<sizeof(data); m++) printf("%c",data[m]);
 }
 
+void save_array_timelabel(double** a, int r, int c, double t)
+{
+	FILE *file;
+	char str[10];
+	char loc[50] = "diff_out/data.t=";
+	sprintf(str, "%.6f", t);
+	strcat(loc,str);
+	file=fopen(loc,"w");     
+
+	for(int i=0; i<r; i++) 
+	{
+		for (int j=0; j<c; j++) fprintf(file,"%f ",a[i][j]);
+		fprintf(file,"\n");
+	}	
+	fclose(file);
+	//if (n==0)	for(int m=0; m<sizeof(data); m++) printf("%c",data[m]);
+}

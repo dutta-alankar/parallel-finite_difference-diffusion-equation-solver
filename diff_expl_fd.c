@@ -103,12 +103,6 @@ int main (int argc, char *argv[])
 		MPI_Recv(&u_old[0][0], (rend+1)*c, MPI_DOUBLE, MASTER, 75+taskid, MPI_COMM_WORLD, &status);
 		for (int i=0; i<(rend+1); i++) for (int j=0; j<c; j++)	     u_new[i][j]=u_old[i][j];
 		printf("Proc %d: Receiving Domain Decomposition....\n",taskid);
-	/*
-		printf("Proc %d:",taskid);
-		for (int m=0; m<=rend+1; m++){
-			for(int n=0; n<c; n++) printf("%.1f   ",u_old[m][n]);
-			printf("\n");}
-	*/
 	}	
 	else if(taskid!=MASTER && taskid!=numtasks-1)
 	{
@@ -117,12 +111,6 @@ int main (int argc, char *argv[])
 		MPI_Recv(&u_old[0][0], (rend+2)*c, MPI_DOUBLE, MASTER, 75+taskid, MPI_COMM_WORLD, &status);
 		for (int i=0; i<(rend+2); i++) for (int j=0; j<c; j++)	     u_new[i][j]=u_old[i][j];
 		printf("Proc %d: Receiving Domain Decomposition....\n",taskid);
-	/*
-		printf("Proc %d:",taskid);
-		for (int m=0; m<=rend+1; m++){
-			for(int n=0; n<c; n++) printf("%.1f   ",u_old[m][n]);
-			printf("\n");}
-	*/
 	}
 	
 	MPI_Barrier(MPI_COMM_WORLD);
