@@ -1,6 +1,19 @@
 # parallel-finite_difference-diffusion-equation-solver
 Parallel (MPI) Row decomposed Diffusion Equation solver by explicit Finite Difference method
 
+```
+  █████▒▄▄▄      ▓█████▄ ▓█████ ▓█████▄ 
+▓██   ▒▒████▄    ▒██▀ ██▌▓█   ▀ ▒██▀ ██▌
+▒████ ░▒██  ▀█▄  ░██   █▌▒███   ░██   █▌
+░▓█▒  ░░██▄▄▄▄██ ░▓█▄   ▌▒▓█  ▄ ░▓█▄   ▌
+░▒█░    ▓█   ▓██▒░▒████▓ ░▒████▒░▒████▓ 
+ ▒ ░    ▒▒   ▓▒█░ ▒▒▓  ▒ ░░ ▒░ ░ ▒▒▓  ▒ 
+ ░       ▒   ▒▒ ░ ░ ▒  ▒  ░ ░  ░ ░ ▒  ▒ 
+ ░ ░     ░   ▒    ░ ░  ░    ░    ░ ░  ░ 
+             ░  ░   ░       ░  ░   ░    
+                  ░              ░      
+```
+
 Diffusion Eqution:    
 ![equation](diff_eqn.gif)
 
